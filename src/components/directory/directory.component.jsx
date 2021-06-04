@@ -1,57 +1,65 @@
 import React from 'react';
-import MenuItem from '../menu-item/menu-item.component';
 
-import './directory.component.scss';
+import './directory.styles.scss';
+
+import MenuItem from '../menu-item/menu-item.component';
 
 class Directory extends React.Component {
   constructor() {
     super();
-
+  
     this.state = {
       sections: [
         {
-          title: 'Hats',
-          imageUrl: 'https://unsplash.com/photos/PMBHxLcQ2_c/download?force=true&w=640',
-          id: 1
-        }, 
-        {
-          title: 'Jackets',
-          imageUrl: 'https://unsplash.com/photos/GIJilzvYLP8/download?force=true&w=640',
-          id: 2
+          title: 'hats',
+          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+          id: 1,
+          linkUrl: 'shop/hats'
         },
         {
-          title: 'Sneakers',
-          imageUrl: 'https://unsplash.com/photos/updW-QUccFE/download?force=true&w=640',
-          id: 3
+          title: 'jackets',
+          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+          id: 2,
+          linkUrl: 'shop/jackets'
         },
         {
-          title: 'Womens',
-          imageUrl: 'https://unsplash.com/photos/NJAFmCuIx1s/download?force=true&w=640',
+          title: 'sneakers',
+          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+          id: 3,
+          linkUrl: 'shop/sneakers'
+        },
+        {
+          title: 'womens',
+          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
           size: 'large',
-          id: 4
+          id: 4,
+          linkUrl: 'shop/womens'
         },
         {
-          title: 'Mens',
-          imageUrl: 'https://unsplash.com/photos/muWowSks60w/download?force=true&w=640',
+          title: 'mens',
+          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
           size: 'large',
-          id: 5
+          id: 5,
+          linkUrl: 'shop/mens'
         }
       ]
-    }
+    }  
   }
 
   render() {
-    return(
-      <div className="directory-menu">
+    return (
+      <div className='directory-menu'>
         {
-          this.state.sections.map(({title, imageUrl, id, size}) => (
-            <MenuItem key={id} title={title} imageUrl={imageUrl} size={size}/>
-            )
-          )
+          this.state.sections.map(({id, ...otherSectionProps }) => (
+          <MenuItem key={id} { ...otherSectionProps }/>
+          ))
         }
       </div>
-    )
+    );
   }
+
+
+
 }
 
 export default Directory;
