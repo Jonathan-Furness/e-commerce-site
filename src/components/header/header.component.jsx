@@ -1,16 +1,20 @@
 import React from 'react';
 
+import {ReactComponent as Logo} from '../../assets/png/GIANNETTI-logo-black.svg';
+
+import { Link } from 'react-router-dom';
+
 import './header.styles.scss';
 
-const Header = () => (
+const Header = ({match, history}) => (
   <div className="header-container">
-    <div className="logo">
-      <h1>LOGO</h1>
-    </div>
+    <Link to='/' className="logo-container">
+      <Logo className='logo' />
+    </Link>
     <div className="menu-options">
-      <ul>About</ul>
-      <ul>Shop</ul>
-      <ul>Contact</ul>
+      <Link className='option' to='/about'>About</Link>
+      <Link className='option' to='/shop'>Shop</Link>
+      <Link className='option' to='/contact'>Contact</Link>
     </div>
   </div>
 )
