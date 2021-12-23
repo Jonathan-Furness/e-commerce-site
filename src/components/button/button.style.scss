@@ -9,11 +9,21 @@
   background-color: black;
   color: white;
   text-transform: uppercase;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bolder;
   cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
 
   &:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
   }
+
+  &.google-signin {
+    background-color: grey;
+  }
 }
+

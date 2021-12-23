@@ -6,7 +6,7 @@ const curr_date = new Date();
 
 const Footer = () => (
   <div className='footer'>
-    <h5>{curr_date.getFullYear()}</h5>
+    <h5>GIANNETTI &copy; {curr_date.getFullYear()}</h5>
   </div>
 )
 
