@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setCurrentUser } from './redux/user/user.actions';
@@ -50,11 +50,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Switch>
-          <Route exact path='/' component={ HomePage } />
-          <Route exact path='/shop' component={ ShopPage } />
-          <Route exact path='/signin' component={ SignInSignUpPage } />
-        </Switch>
+        <Routes>
+          <Route path='/' element={ <HomePage/> } />
+          <Route path='/shop' element={ <ShopPage/> } />
+          <Route path='/signin' element={ <SignInSignUpPage/> } />
+        </Routes>
         <Footer />
       </div>
     );
