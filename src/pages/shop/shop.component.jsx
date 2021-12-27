@@ -21,15 +21,11 @@ const ShopPage = ({ updateCollections }) => {
 
   useEffect(() => {
     const collectionRef = firestore.collection('collections');
-    const unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+    collectionRef.get().then(snapshot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
       updateCollections(collectionsMap)
-      setIsLoading(false);
+      setIsLoading(false)
     })
-
-    return () => {
-      unsubscribeFromSnapshot()
-    }
   }, [updateCollections]);
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,15 +14,10 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import SignInSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
-class App extends React.Component {
+const App = ({ setCurrentUser }) => {
 
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-
-    const { setCurrentUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         
@@ -39,27 +34,22 @@ class App extends React.Component {
       }
       setCurrentUser({currentUser: null});
     })
-  }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+    return () => unsubscribeFromAuth()
+  }, [setCurrentUser])
 
-  render() {
-
-    return (
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path='/' element={ <HomePage/> } />
-          <Route path='/shop/*' element={ <ShopPage/> } />
-          <Route path='/signin' element={ <SignInSignUpPage/> } />
-          <Route path='/checkout' element={ <CheckoutPage/>} />
-        </Routes>
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path='/' element={ <HomePage/> } />
+        <Route path='/shop/*' element={ <ShopPage/> } />
+        <Route path='/signin' element={ <SignInSignUpPage/> } />
+        <Route path='/checkout' element={ <CheckoutPage/>} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
 const mapDispatchToProps = dispatch => ({
